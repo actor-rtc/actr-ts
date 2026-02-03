@@ -16,10 +16,14 @@ napi = { version = "3.8.2", features = ["async", "tokio_rt"] }
 napi-derive = "3.5.1"
 
 # actr dependencies (git rev)
-actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0" }
-actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0" }
-actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0", features = ["opentelemetry"] }
-actr-config = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0", features = ["opentelemetry"] }
+actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "61173eec65bbaeb5460afd54ce82728bdcbaf136" }
+actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "61173eec65bbaeb5460afd54ce82728bdcbaf136" }
+actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "61173eec65bbaeb5460afd54ce82728bdcbaf136", features = [
+    "opentelemetry",
+] }
+actr-config = { git = "https://github.com/actor-rtc/actr", rev = "61173eec65bbaeb5460afd54ce82728bdcbaf136", features = [
+    "opentelemetry",
+] }
 
 # Async runtime
 tokio = { version = "1", features = ["full"] }

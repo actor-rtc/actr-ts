@@ -1,14 +1,13 @@
 # actr-ts
 
 中文 | [English](./README.md)
-
 Language: 中文（简体）
 
 actr-ts 是基于 napi-rs 的 ACTR（Actor-RTC）框架 TypeScript/Node.js 绑定。
 
 ## 概述
 
-actr-ts 提供 ACTR 框架的原生 Node.js 绑定，让 TypeScript/JavaScript 开发者可以构建具备 WebRTC 能力的 actor 分布式系统。
+actr-ts 提供 ACTR 框架的原生 Node.js 绑定，使 TypeScript/JavaScript 开发者能够构建具备 WebRTC 能力的 actor 分布式系统。
 
 ## 特性
 
@@ -125,10 +124,10 @@ tracing_enabled = false
 
 ## 生成代码（示例）
 
-示例客户端依赖 `examples/**/generated` 下的预生成文件。可以使用项目内的 skill 生成器重新生成（不依赖 Actr CLI）。
+示例客户端使用 `examples/**/generated` 下的预生成文件。要重新生成，请使用项目内的 skill 生成器（无需 Actr CLI）。
 
 前置条件：
-- `npm install`（会安装 `protobufjs` 与 `@iarna/toml` 作为 devDependencies）
+- `npm install`（从 devDependencies 安装 `protobufjs` 与 `@iarna/toml`）
 
 为 echo-client 生成：
 
@@ -137,12 +136,12 @@ node skills/actr-ts-codegen/scripts/generate-generated.js --config examples/echo
 ```
 
 注意：
-- 生成器优先读取 `Actr.lock.toml`；请确保它包含希望生成的依赖。
-- proto 默认来源是 `examples/echo-client/protos/remote`。
+- 生成器优先读取 `Actr.lock.toml`；请确保包含你想生成的依赖。
+- proto 默认来源为 `examples/echo-client/protos/remote`。
 
 输出包括：
 - `<package>.pb.ts/.js` protobuf 编解码
-- `<package>.client.ts/.js` 路由辅助方法
+- `<package>.client.ts/.js` 路由辅助
 - `local.actor.ts/.js` 本地转发逻辑
 
 ## API 文档
@@ -170,11 +169,11 @@ node skills/actr-ts-codegen/scripts/generate-generated.js --config examples/echo
 - `actorRef.tell(routeKey, payloadType, payload): Promise<void>` - 仅发送不等待
 - `actorRef.shutdown(): void` - 触发关闭
 - `actorRef.waitForShutdown(): Promise<void>` - 等待关闭
-- `actorRef.stop(): Promise<void>` - 关闭并等待完成
+- `actorRef.stop(): Promise<void>` - 关闭并等待
 
 ### Workload 接口
 
-实现该接口定义 actor 行为：
+实现该接口以定义 actor 行为：
 
 ```typescript
 interface Workload {
@@ -217,10 +216,10 @@ node --import tsx examples/echo-client/index.ts
 
 ## 示例
 
-完整示例在 [examples](./examples) 目录：
+完整示例见 [examples](./examples) 目录：
 
-- [echo-twice-server](./examples/echo-twice-server) - EchoTwice 服务端
-- [echo-client](./examples/echo-client) - 带服务发现的 Echo 客户端
+- [echo-twice-server](./examples/echo-twice-server) - EchoTwice server
+- [echo-client](./examples/echo-client) - Echo client with discovery
 
 ## 参考实现
 

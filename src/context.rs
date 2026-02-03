@@ -2,6 +2,8 @@ use napi::bindgen_prelude::*;
 use napi_derive::napi;
 use actr_runtime::context::RuntimeContext;
 use actr_framework::Context;
+use napi::threadsafe_function::{ThreadsafeFunction, ThreadsafeFunctionCallMode};
+use std::sync::Arc;
 
 use crate::types::{ActrId, ActrType, PayloadType, DataStream};
 
@@ -114,6 +116,38 @@ impl ContextBridge {
     .await
     .map_err(|e| crate::error::protocol_error_to_napi(e))?;
 
+    Ok(())
+  }
+
+  /// Register a callback for an incoming DataStream.
+  #[napi]
+  pub async fn register_stream(
+    &self,
+    stream_id: String,
+    #[napi(ts_arg_type = "(chunk: DataStream, sender: ActrId) => void")]
+    callback: ThreadsafeFunction<(DataStream, ActrId)>,
+  ) -> Result<()> {
+    use actr_framework::Context;
+    let callback = Arc::new(callback);
+    self.inner.register_stream(stream_id, move |chunk, sender| {
+      let callback = callback.clone();
+      Box::pin(async move {
+        let chunk_bridge: DataStream = chunk.into();
+        let sender_bridge: ActrId = sender.into();
+        callback.call(Ok((chunk_bridge, sender_bridge)), ThreadsafeFunctionCallMode::NonBlocking);
+        Ok(())
+      })
+    }).await.map_err(crate::error::protocol_error_to_napi)?;
+    Ok(())
+  }
+
+  /// Unregister a DataStream callback.
+  #[napi]
+  pub async fn unregister_stream(&self, stream_id: String) -> Result<()> {
+    use actr_framework::Context;
+    self.inner.unregister_stream(&stream_id)
+      .await
+      .map_err(crate::error::protocol_error_to_napi)?;
     Ok(())
   }
 }

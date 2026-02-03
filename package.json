@@ -56,5 +56,8 @@
     "index.d.ts",
     "*.node",
     "dist/**/*"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
