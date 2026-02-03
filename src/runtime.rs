@@ -17,13 +17,13 @@ impl ActrSystem {
     #[napi(factory)]
     pub async fn from_file(config_path: String) -> Result<ActrSystem> {
         let config = actr_config::ConfigParser::from_file(&config_path)
-            .map_err(|e| crate::error::config_error_to_napi(e))?;
+            .map_err(crate::error::config_error_to_napi)?;
 
         crate::logger::init_observability(config.observability.clone());
 
         let system = actr_runtime::ActrSystem::new(config.clone())
             .await
-            .map_err(|e| crate::error::protocol_error_to_napi(e))?;
+            .map_err(crate::error::protocol_error_to_napi)?;
 
         Ok(ActrSystem {
             inner: Some(system),
@@ -64,7 +64,7 @@ impl ActrNode {
         let actr_ref = node
             .start()
             .await
-            .map_err(|e| crate::error::protocol_error_to_napi(e))?;
+            .map_err(crate::error::protocol_error_to_napi)?;
 
         Ok(ActrRef { inner: actr_ref })
     }
@@ -91,7 +91,7 @@ impl ActrRef {
             .inner
             .discover_route_candidates(&proto_type, count)
             .await
-            .map_err(|e| crate::error::protocol_error_to_napi(e))?;
+            .map_err(crate::error::protocol_error_to_napi)?;
 
         Ok(ids.into_iter().map(|id| id.into()).collect())
     }
@@ -115,7 +115,7 @@ impl ActrRef {
                 proto_payload_type,
             )
             .await
-            .map_err(|e| crate::error::protocol_error_to_napi(e))?;
+            .map_err(crate::error::protocol_error_to_napi)?;
 
         Ok(response.to_vec().into())
     }
@@ -136,7 +136,7 @@ impl ActrRef {
                 proto_payload_type,
             )
             .await
-            .map_err(|e| crate::error::protocol_error_to_napi(e))?;
+            .map_err(crate::error::protocol_error_to_napi)?;
 
         Ok(())
     }

@@ -22,34 +22,10 @@ jobs:
       matrix:
         settings:
           - host: macos-latest
-            target: x86_64-apple-darwin
-            build: |
-              npm run build
-              strip -x *.node
-          - host: windows-latest
-            build: npm run build
-            target: x86_64-pc-windows-msvc
-          - host: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: npm run build -- --target x86_64-unknown-linux-gnu
-          - host: ubuntu-latest
-            target: x86_64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            build: npm run build -- --target x86_64-unknown-linux-musl
-          - host: macos-latest
             target: aarch64-apple-darwin
             build: |
               npm run build -- --target aarch64-apple-darwin
               strip -x *.node
-          - host: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
-            build: npm run build -- --target aarch64-unknown-linux-gnu
-          - host: ubuntu-latest
-            target: aarch64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine-aarch64
-            build: npm run build -- --target aarch64-unknown-linux-musl
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v4
@@ -107,13 +83,7 @@ jobs:
       - name: Move artifacts
         run: |
           ls -R artifacts
-          cp artifacts/bindings-x86_64-apple-darwin/*.node . || true
           cp artifacts/bindings-aarch64-apple-darwin/*.node . || true
-          cp artifacts/bindings-x86_64-unknown-linux-gnu/*.node . || true
-          cp artifacts/bindings-x86_64-unknown-linux-musl/*.node . || true
-          cp artifacts/bindings-aarch64-unknown-linux-gnu/*.node . || true
-          cp artifacts/bindings-aarch64-unknown-linux-musl/*.node . || true
-          cp artifacts/bindings-x86_64-pc-windows-msvc/*.node . || true
       - name: Build JS
         run: npm run compile:ts
       - name: Create Release

@@ -41,18 +41,19 @@ impl DynamicWorkload {
             .build_callback(|ctx| {
                 let (ctx_bridge, envelope) = ctx.value;
                 let RpcEnvelopeBridge {
-                    routeKey,
+                    route_key,
                     payload,
-                    requestId,
+                    request_id,
                 } = envelope;
 
                 let mut js_envelope = Object::new(&ctx.env)?;
-                js_envelope.set("routeKey", routeKey)?;
+                js_envelope.set("routeKey", route_key)?;
                 js_envelope.set("payload", payload)?;
-                js_envelope.set("requestId", requestId)?;
+                js_envelope.set("requestId", request_id)?;
 
-        let raw = unsafe { ToNapiValue::to_napi_value(ctx.env.raw(), &js_envelope)? };
-        let js_envelope = unsafe { ObjectRef::<false>::from_napi_value(ctx.env.raw(), raw)? };
+                let raw = unsafe { ToNapiValue::to_napi_value(ctx.env.raw(), js_envelope)? };
+                let js_envelope =
+                    unsafe { ObjectRef::<false>::from_napi_value(ctx.env.raw(), raw)? };
 
                 Ok(FnArgs::from((ctx_bridge, js_envelope)))
             })?;

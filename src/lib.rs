@@ -1,14 +1,14 @@
 #![deny(clippy::all)]
 
-mod types;
-mod runtime;
-mod workload;
 mod context;
 mod error;
 mod logger;
+mod runtime;
+mod types;
+mod workload;
 
 // Re-export modules
-pub use types::*;
-pub use runtime::*;
-pub use workload::*;
 pub use context::*;
+pub use runtime::*;
+pub use types::*;
+pub use workload::*;

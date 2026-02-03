@@ -3,15 +3,15 @@ use napi_derive::napi;
 
 // Realm
 #[napi(object)]
-#[allow(non_snake_case)]
 pub struct Realm {
-    pub realmId: u32,
+    #[napi(js_name = "realmId")]
+    pub realm_id: u32,
 }
 
 impl From<actr_protocol::Realm> for Realm {
     fn from(realm: actr_protocol::Realm) -> Self {
         Self {
-            realmId: realm.realm_id,
+            realm_id: realm.realm_id,
         }
     }
 }
@@ -19,7 +19,7 @@ impl From<actr_protocol::Realm> for Realm {
 impl From<Realm> for actr_protocol::Realm {
     fn from(realm: Realm) -> Self {
         Self {
-            realm_id: realm.realmId,
+            realm_id: realm.realm_id,
         }
     }
 }
@@ -51,10 +51,10 @@ impl From<ActrType> for actr_protocol::ActrType {
 
 // ActrId
 #[napi(object)]
-#[allow(non_snake_case)]
 pub struct ActrId {
     pub realm: Realm,
-    pub serialNumber: i64, // i64 for JavaScript number safety
+    #[napi(js_name = "serialNumber")]
+    pub serial_number: i64, // i64 for JavaScript number safety
     pub r#type: ActrType,
 }
 
@@ -62,7 +62,7 @@ impl From<actr_protocol::ActrId> for ActrId {
     fn from(id: actr_protocol::ActrId) -> Self {
         Self {
             realm: id.realm.into(),
-            serialNumber: id.serial_number as i64,
+            serial_number: id.serial_number as i64,
             r#type: id.r#type.into(),
         }
     }
@@ -72,7 +72,7 @@ impl From<ActrId> for actr_protocol::ActrId {
     fn from(id: ActrId) -> Self {
         Self {
             realm: id.realm.into(),
-            serial_number: id.serialNumber as u64,
+            serial_number: id.serial_number as u64,
             r#type: id.r#type.into(),
         }
     }
@@ -121,19 +121,20 @@ pub struct MetadataEntry {
 
 // DataStream
 #[napi(object)]
-#[allow(non_snake_case)]
 pub struct DataStream {
-    pub streamId: String,
+    #[napi(js_name = "streamId")]
+    pub stream_id: String,
     pub sequence: i64,
     pub payload: Buffer,
     pub metadata: Vec<MetadataEntry>,
-    pub timestampMs: Option<i64>,
+    #[napi(js_name = "timestampMs")]
+    pub timestamp_ms: Option<i64>,
 }
 
 impl From<actr_protocol::DataStream> for DataStream {
     fn from(stream: actr_protocol::DataStream) -> Self {
         Self {
-            streamId: stream.stream_id,
+            stream_id: stream.stream_id,
             sequence: stream.sequence as i64,
             payload: stream.payload.to_vec().into(),
             metadata: stream
@@ -144,7 +145,7 @@ impl From<actr_protocol::DataStream> for DataStream {
                     value: e.value,
                 })
                 .collect(),
-            timestampMs: stream.timestamp_ms.map(|t| t as i64),
+            timestamp_ms: stream.timestamp_ms.map(|t| t),
         }
     }
 }
@@ -152,7 +153,7 @@ impl From<actr_protocol::DataStream> for DataStream {
 impl From<DataStream> for actr_protocol::DataStream {
     fn from(stream: DataStream) -> Self {
         Self {
-            stream_id: stream.streamId,
+            stream_id: stream.stream_id,
             sequence: stream.sequence as u64,
             payload: bytes::Bytes::from(stream.payload.to_vec()),
             metadata: stream
@@ -163,29 +164,30 @@ impl From<DataStream> for actr_protocol::DataStream {
                     value: e.value,
                 })
                 .collect(),
-            timestamp_ms: stream.timestampMs.map(|t| t as i64),
+            timestamp_ms: stream.timestamp_ms.map(|t| t),
         }
     }
 }
 
 // RpcEnvelopeBridge
 #[napi(object)]
-#[allow(non_snake_case)]
 pub struct RpcEnvelopeBridge {
-    pub routeKey: String,
+    #[napi(js_name = "routeKey")]
+    pub route_key: String,
     pub payload: Buffer,
-    pub requestId: String,
+    #[napi(js_name = "requestId")]
+    pub request_id: String,
 }
 
 impl From<actr_protocol::RpcEnvelope> for RpcEnvelopeBridge {
     fn from(envelope: actr_protocol::RpcEnvelope) -> Self {
         Self {
-            routeKey: envelope.route_key,
+            route_key: envelope.route_key,
             payload: envelope
                 .payload
                 .map(|p| p.to_vec().into())
                 .unwrap_or_else(|| Buffer::from(vec![])),
-            requestId: envelope.request_id,
+            request_id: envelope.request_id,
         }
     }
 }
