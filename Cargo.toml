@@ -1,0 +1,46 @@
+[package]
+name = "actr-ts"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "Apache-2.0"
+repository = "https://github.com/actor-rtc/actr-ts"
+authors = ["Actor-RTC Contributors"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# napi-rs
+napi = { version = "3.8.2", features = ["async", "tokio_rt"] }
+napi-derive = "3.5.1"
+
+# actr dependencies (git rev)
+actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0" }
+actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0" }
+actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0", features = ["opentelemetry"] }
+actr-config = { git = "https://github.com/actor-rtc/actr", rev = "2fb536910a8ea8add0a04f1051c99dd2449619d0", features = ["opentelemetry"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+bytes = "1"
+
+# Utilities
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+async-trait = "0.1"
+parking_lot = "0.12"
+
+# OpenTelemetry
+opentelemetry = { version = "0.30", features = ["trace"] }
+opentelemetry_sdk = { version = "0.30", features = ["rt-tokio"] }
+opentelemetry-otlp = { version = "0.30", features = ["grpc-tonic"] }
+tracing-opentelemetry = "0.31"
+
+[build-dependencies]
+napi-build = "2"
+
+[profile.release]
+# lto = true
+strip = true
