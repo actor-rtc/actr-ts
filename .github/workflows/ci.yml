@@ -97,6 +97,8 @@ jobs:
           cp artifacts/bindings-aarch64-apple-darwin/*.node . || true
       - name: Build JS
         run: npm run compile:ts
+      - name: Prepare npm package
+        run: npm run prepublishOnly
       - name: Pack
         run: npm pack
       - name: Read package version
