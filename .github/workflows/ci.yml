@@ -39,6 +39,9 @@ jobs:
       - name: Set npm registry
         if: ${{ !matrix.settings.docker }}
         run: npm config set registry https://registry.npmjs.org/
+      - name: Install protoc
+        if: ${{ !matrix.settings.docker }}
+        run: brew install protobuf
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
