@@ -36,6 +36,9 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set npm registry
+        if: ${{ !matrix.settings.docker }}
+        run: npm config set registry https://registry.npmjs.org/
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
@@ -75,6 +78,8 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set npm registry
+        run: npm config set registry https://registry.npmjs.org/
       - name: Install dependencies
         run: npm install
       - name: Download all artifacts
