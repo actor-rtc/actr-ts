@@ -33,5 +33,10 @@ export interface ContextBridge extends NativeContextBridge {
    * @returns Response payload (protobuf-encoded Buffer)
    */
   call(target: ActrId, routeKey: string, payload: Buffer): Promise<Buffer>;
+
+  /**
+   * Get the current RPC call ID.
+   */
+  callId(): ActrId | null;
 }
 

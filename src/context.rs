@@ -153,4 +153,10 @@ impl ContextBridge {
             .map_err(crate::error::protocol_error_to_napi)?;
         Ok(())
     }
+
+    /// Get the current RPC call ID from the runtime context.
+    #[napi]
+    pub fn call_id(&self) -> Option<ActrId> {
+        self.inner.call_id().map(|id| id.into())
+    }
 }
