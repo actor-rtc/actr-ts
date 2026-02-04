@@ -97,6 +97,8 @@ jobs:
           cp artifacts/bindings-aarch64-apple-darwin/*.node . || true
       - name: Build JS
         run: npm run compile:ts
+      - name: Pack
+        run: npm pack
       - name: Read package version
         id: package
         run: |
@@ -112,6 +114,7 @@ jobs:
             dist/**
             package.json
             README.md
+            *.tgz
           draft: false
           prerelease: false
         env:
