@@ -3,6 +3,8 @@ env:
   DEBUG: napi:*
   APP_NAME: actr
   MACOSX_DEPLOYMENT_TARGET: "10.13"
+permissions:
+  contents: write
 "on":
   push:
     branches:
