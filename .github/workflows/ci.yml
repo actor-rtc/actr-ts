@@ -24,7 +24,7 @@ jobs:
           - host: macos-latest
             target: aarch64-apple-darwin
             build: |
-              napi build --platform --release --target aarch64-apple-darwin
+              npx --no-install napi build --platform --release --target aarch64-apple-darwin
               npm run compile:ts
               strip -x *.node
     runs-on: ${{ matrix.settings.host }}
