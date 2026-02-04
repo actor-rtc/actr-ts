@@ -1,4 +1,0 @@
-interface:
-  display_name: "Actr TS Codegen"
-  short_description: "Generate actr-ts generated code"
-  default_prompt: "Use $actr-ts-codegen to regenerate examples/**/generated from Actr.toml and .proto files."

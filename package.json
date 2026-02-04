@@ -20,6 +20,7 @@
     "artifacts": "napi artifacts",
     "build": "napi build --platform --release && npm run compile:ts",
     "build:debug": "napi build --platform",
+    "codegen": "node scripts/codegen.js",
     "prepublishOnly": "napi prepublish -t npm",
     "test": "vitest",
     "version": "napi version",

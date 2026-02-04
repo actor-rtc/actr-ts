@@ -123,7 +123,7 @@ tracing_enabled = false
 
 ## Generated Code (Examples)
 
-The example clients use pre-generated files under `examples/**/generated`. To regenerate them, use the project skill-based generator (no Actr CLI required).
+The example clients use pre-generated files under `examples/**/generated`. To regenerate them, use the repository codegen script (no Actr CLI required).
 
 Prerequisites:
 - `npm install` (installs `protobufjs` and `@iarna/toml` from devDependencies)
@@ -131,7 +131,7 @@ Prerequisites:
 Generate for echo-client:
 
 ```bash
-node skills/actr-ts-codegen/scripts/generate-generated.js --config examples/echo-client/Actr.toml
+npm run codegen -- --config examples/echo-client/Actr.toml
 ```
 
 Notes:

@@ -124,7 +124,9 @@ tracing_enabled = false
 
 ## 生成代码（示例）
 
-示例客户端使用 `examples/**/generated` 下的预生成文件。要重新生成，请使用项目内的 skill 生成器（无需 Actr CLI）。
+Language: zh-CN.
+
+示例客户端使用 `examples/**/generated` 下的预生成文件。要重新生成，请使用仓库内的 codegen 脚本（无需 Actr CLI）。
 
 前置条件：
 - `npm install`（从 devDependencies 安装 `protobufjs` 与 `@iarna/toml`）
@@ -132,7 +134,7 @@ tracing_enabled = false
 为 echo-client 生成：
 
 ```bash
-node skills/actr-ts-codegen/scripts/generate-generated.js --config examples/echo-client/Actr.toml
+npm run codegen -- --config examples/echo-client/Actr.toml
 ```
 
 注意：
