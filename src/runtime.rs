@@ -54,6 +54,11 @@ pub struct ActrNode {
 #[napi]
 impl ActrNode {
     /// Start the node and return ActrRef.
+    ///
+    /// # Safety
+    ///
+    /// This function is unsafe because it takes ownership of the internal node and
+    /// starts the actor runtime. It must only be called once.
     #[napi]
     pub async unsafe fn start(&mut self) -> Result<ActrRef> {
         let node = self

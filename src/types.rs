@@ -145,7 +145,7 @@ impl From<actr_protocol::DataStream> for DataStream {
                     value: e.value,
                 })
                 .collect(),
-            timestamp_ms: stream.timestamp_ms.map(|t| t),
+            timestamp_ms: stream.timestamp_ms,
         }
     }
 }
@@ -164,7 +164,7 @@ impl From<DataStream> for actr_protocol::DataStream {
                     value: e.value,
                 })
                 .collect(),
-            timestamp_ms: stream.timestamp_ms.map(|t| t),
+            timestamp_ms: stream.timestamp_ms,
         }
     }
 }
