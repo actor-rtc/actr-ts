@@ -157,6 +157,6 @@ impl ContextBridge {
     /// Get the current RPC call ID from the runtime context.
     #[napi]
     pub fn call_id(&self) -> Option<ActrId> {
-        self.inner.call_id().map(|id| id.into())
+        self.inner.caller_id().map(Into::into)
     }
 }
