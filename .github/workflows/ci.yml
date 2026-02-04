@@ -24,7 +24,8 @@ jobs:
           - host: macos-latest
             target: aarch64-apple-darwin
             build: |
-              npm run build -- --target aarch64-apple-darwin
+              npx --no-install napi build --platform --release --target aarch64-apple-darwin
+              npm run compile:ts
               strip -x *.node
     runs-on: ${{ matrix.settings.host }}
     steps:
@@ -35,6 +36,12 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set npm registry
+        if: ${{ !matrix.settings.docker }}
+        run: npm config set registry https://registry.npmjs.org/
+      - name: Install protoc
+        if: ${{ !matrix.settings.docker }}
+        run: brew install protobuf
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
@@ -74,6 +81,8 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set npm registry
+        run: npm config set registry https://registry.npmjs.org/
       - name: Install dependencies
         run: npm install
       - name: Download all artifacts
