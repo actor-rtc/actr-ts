@@ -33,3 +33,6 @@ examples/echo-client/.tmp/
 .env
 .env.local
 .cursor/
+
+# Serena
+.serena/
