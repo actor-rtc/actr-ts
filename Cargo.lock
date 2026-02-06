@@ -112,7 +112,7 @@ dependencies = [
 
 [[package]]
 name = "actr-ts"
-version = "0.1.7"
+version = "0.1.8"
 dependencies = [
  "actr-config",
  "actr-framework",
