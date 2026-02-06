@@ -152,6 +152,16 @@ jobs:
         run: |
           VERSION=$(node -p 'require("./package.json").version')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          TAG="v${{ steps.package.outputs.version }}"
+          git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
