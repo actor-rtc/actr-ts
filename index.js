@@ -76,10 +76,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-android-arm64')
-        const bindingPackageVersion = require('@actor-rtc/actr-android-arm64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -92,10 +88,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-android-arm-eabi')
-        const bindingPackageVersion = require('@actor-rtc/actr-android-arm-eabi/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -113,10 +105,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-win32-x64-gnu')
-        const bindingPackageVersion = require('@actor-rtc/actr-win32-x64-gnu/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -129,10 +117,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-win32-x64-msvc')
-        const bindingPackageVersion = require('@actor-rtc/actr-win32-x64-msvc/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -146,10 +130,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-win32-ia32-msvc')
-        const bindingPackageVersion = require('@actor-rtc/actr-win32-ia32-msvc/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -162,10 +142,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-win32-arm64-msvc')
-        const bindingPackageVersion = require('@actor-rtc/actr-win32-arm64-msvc/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -181,10 +157,6 @@ function requireNative() {
     }
     try {
       const binding = require('@actor-rtc/actr-darwin-universal')
-      const bindingPackageVersion = require('@actor-rtc/actr-darwin-universal/package.json').version
-      if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-        throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-      }
       return binding
     } catch (e) {
       loadErrors.push(e)
@@ -197,10 +169,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-darwin-x64')
-        const bindingPackageVersion = require('@actor-rtc/actr-darwin-x64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -213,10 +181,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-darwin-arm64')
-        const bindingPackageVersion = require('@actor-rtc/actr-darwin-arm64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -233,10 +197,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-freebsd-x64')
-        const bindingPackageVersion = require('@actor-rtc/actr-freebsd-x64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -249,10 +209,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-freebsd-arm64')
-        const bindingPackageVersion = require('@actor-rtc/actr-freebsd-arm64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -270,10 +226,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-x64-musl')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-x64-musl/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -286,10 +238,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-x64-gnu')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-x64-gnu/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -304,10 +252,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-arm64-musl')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-arm64-musl/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -320,10 +264,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-arm64-gnu')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-arm64-gnu/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -338,10 +278,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-arm-musleabihf')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-arm-musleabihf/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -354,10 +290,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-arm-gnueabihf')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-arm-gnueabihf/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -372,10 +304,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-loong64-musl')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-loong64-musl/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -388,10 +316,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-loong64-gnu')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-loong64-gnu/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -406,10 +330,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-riscv64-musl')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-riscv64-musl/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -422,10 +342,6 @@ function requireNative() {
         }
         try {
           const binding = require('@actor-rtc/actr-linux-riscv64-gnu')
-          const bindingPackageVersion = require('@actor-rtc/actr-linux-riscv64-gnu/package.json').version
-          if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
           return binding
         } catch (e) {
           loadErrors.push(e)
@@ -439,10 +355,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-linux-ppc64-gnu')
-        const bindingPackageVersion = require('@actor-rtc/actr-linux-ppc64-gnu/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -455,10 +367,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-linux-s390x-gnu')
-        const bindingPackageVersion = require('@actor-rtc/actr-linux-s390x-gnu/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -475,10 +383,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-openharmony-arm64')
-        const bindingPackageVersion = require('@actor-rtc/actr-openharmony-arm64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -491,10 +395,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-openharmony-x64')
-        const bindingPackageVersion = require('@actor-rtc/actr-openharmony-x64/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)
@@ -507,10 +407,6 @@ function requireNative() {
       }
       try {
         const binding = require('@actor-rtc/actr-openharmony-arm')
-        const bindingPackageVersion = require('@actor-rtc/actr-openharmony-arm/package.json').version
-        if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
         return binding
       } catch (e) {
         loadErrors.push(e)

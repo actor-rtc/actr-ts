@@ -108,6 +108,26 @@ jobs:
         run: npm config set registry https://registry.npmjs.org/
       - name: Install dependencies
         run: npm install
+      - name: Install protoc (Linux)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          targets: x86_64-unknown-linux-gnu
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: x86_64-unknown-linux-gnu-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Regenerate index.js
+        run: npx --no-install napi build --platform --release --target x86_64-unknown-linux-gnu
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
@@ -119,6 +139,8 @@ jobs:
           cp artifacts/bindings-aarch64-unknown-linux-gnu/*.node . || true
           cp artifacts/bindings-x86_64-unknown-linux-gnu/*.node . || true
           cp artifacts/bindings-x86_64-pc-windows-msvc/*.node . || true
+      - name: Strip NAPI version check
+        run: npm run strip-version-check
       - name: Build JS
         run: npm run compile:ts
       - name: Prepare npm package

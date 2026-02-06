@@ -24,7 +24,8 @@
     "prepublishOnly": "napi prepublish -t npm",
     "test": "vitest",
     "version": "napi version",
-    "compile:ts": "tsc"
+    "compile:ts": "tsc",
+    "strip-version-check": "node scripts/strip-napi-version-check.js"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
