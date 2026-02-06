@@ -29,6 +29,16 @@ jobs:
               npx --no-install napi build --platform --release --target aarch64-apple-darwin
               npm run compile:ts
               strip -x *.node
+          - host: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
+            build: |
+              set -e
+              docker run --rm \
+                -v "$PWD":/workspace \
+                -w /workspace \
+                ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64 \
+                bash -lc "npm install && npx --no-install napi build --platform --release --target aarch64-unknown-linux-gnu && aarch64-linux-gnu-strip actr.*.node"
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v4
@@ -60,6 +70,7 @@ jobs:
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Install dependencies
+        if: ${{ !matrix.settings.docker }}
         run: npm install
       - name: Build
         run: ${{ matrix.settings.build }}
@@ -95,6 +106,7 @@ jobs:
         run: |
           ls -R artifacts
           cp artifacts/bindings-aarch64-apple-darwin/*.node . || true
+          cp artifacts/bindings-aarch64-unknown-linux-gnu/*.node . || true
       - name: Build JS
         run: npm run compile:ts
       - name: Prepare npm package
