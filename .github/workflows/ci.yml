@@ -35,6 +35,17 @@ jobs:
               npx --no-install napi build --platform --release --target aarch64-unknown-linux-gnu
               npm run compile:ts
               strip *.node
+          - host: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            build: |
+              npx --no-install napi build --platform --release --target x86_64-unknown-linux-gnu
+              npm run compile:ts
+              strip *.node
+          - host: windows-latest
+            target: x86_64-pc-windows-msvc
+            build: |
+              npx --no-install napi build --platform --release --target x86_64-pc-windows-msvc
+              npm run compile:ts
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v4
@@ -53,6 +64,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y protobuf-compiler
+      - name: Install protoc (Windows)
+        if: runner.os == 'Windows'
+        run: choco install protoc --no-progress -y
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -71,7 +85,6 @@ jobs:
         run: npm install
       - name: Build
         run: ${{ matrix.settings.build }}
-        shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -104,6 +117,8 @@ jobs:
           ls -R artifacts
           cp artifacts/bindings-aarch64-apple-darwin/*.node . || true
           cp artifacts/bindings-aarch64-unknown-linux-gnu/*.node . || true
+          cp artifacts/bindings-x86_64-unknown-linux-gnu/*.node . || true
+          cp artifacts/bindings-x86_64-pc-windows-msvc/*.node . || true
       - name: Build JS
         run: npm run compile:ts
       - name: Prepare npm package
