@@ -1,4 +1,4 @@
-import { ActrSystem, Workload, ContextBridge, RpcEnvelopeBridge } from '../../dist/index.js';
+import { ActrSystem, Workload, Context, RpcEnvelope } from '../../dist/index.js';
 
 const ECHO_TWICE_ROUTE_KEY = 'echo_twice.EchoTwiceService.EchoTwice';
 
@@ -117,15 +117,15 @@ function varintToNumber(value: bigint, label: string): number {
 }
 
 class EchoTwiceServerWorkload implements Workload {
-  async onStart(ctx: ContextBridge): Promise<void> {
+  async onStart(ctx: Context): Promise<void> {
     console.log('EchoTwice server started');
   }
 
-  async onStop(ctx: ContextBridge): Promise<void> {
+  async onStop(ctx: Context): Promise<void> {
     console.log('EchoTwice server stopped');
   }
 
-  async dispatch(ctx: ContextBridge, envelope: RpcEnvelopeBridge): Promise<Buffer> {
+  async dispatch(ctx: Context, envelope: RpcEnvelope): Promise<Buffer> {
     if (envelope.routeKey === ECHO_TWICE_ROUTE_KEY) {
       const request = decodeEchoTwiceRequest(envelope.payload);
       const reply = `${request.message}${request.message}`;

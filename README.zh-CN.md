@@ -29,18 +29,18 @@ npm install @actor-rtc/actr
 ### EchoTwice Server
 
 ```typescript
-import { ActrSystem, Workload, ContextBridge, RpcEnvelopeBridge } from '@actor-rtc/actr';
+import { ActrSystem, Workload, Context, RpcEnvelope } from '@actor-rtc/actr';
 
 class EchoTwiceServerWorkload implements Workload {
-  async onStart(ctx: ContextBridge): Promise<void> {
+  async onStart(ctx: Context): Promise<void> {
     console.log('EchoTwice server started');
   }
 
-  async onStop(ctx: ContextBridge): Promise<void> {
+  async onStop(ctx: Context): Promise<void> {
     console.log('EchoTwice server stopped');
   }
 
-  async dispatch(ctx: ContextBridge, envelope: RpcEnvelopeBridge): Promise<Buffer> {
+  async dispatch(ctx: Context, envelope: RpcEnvelope): Promise<Buffer> {
     if (envelope.routeKey === 'echo_twice.EchoTwiceService.EchoTwice') {
       return envelope.payload; // EchoTwice response is omitted for brevity
     }
@@ -126,7 +126,8 @@ tracing_enabled = false
 
 Language: zh-CN.
 
-示例客户端使用 `examples/**/generated` 下的预生成文件。要重新生成，请使用仓库内的 codegen 脚本（无需 Actr CLI）。
+示例客户端使用 `examples/**/generated` 下的生成文件，这些目录 **已经加入 .gitignore**。  
+克隆仓库后，**需要先运行 codegen 脚本生成这些文件**，再运行示例（不需要 Actr CLI）。
 
 前置条件：
 - `npm install`（从 devDependencies 安装 `protobufjs` 与 `@iarna/toml`）
@@ -142,9 +143,9 @@ npm run codegen -- --config examples/echo-client/Actr.toml
 - proto 默认来源为 `examples/echo-client/protos/remote`。
 
 输出包括：
-- `<package>.pb.ts/.js` protobuf 编解码
-- `<package>.client.ts/.js` 路由辅助
-- `local.actor.ts/.js` 本地转发逻辑
+- `<package>.pb.ts` protobuf 编解码
+- `<package>.client.ts` 路由辅助
+- `local.actor.ts` 本地转发逻辑
 
 ## API 文档
 
@@ -179,9 +180,9 @@ npm run codegen -- --config examples/echo-client/Actr.toml
 
 ```typescript
 interface Workload {
-  onStart(ctx: ContextBridge): Promise<void>;
-  onStop(ctx: ContextBridge): Promise<void>;
-  dispatch(ctx: ContextBridge, envelope: RpcEnvelopeBridge): Promise<Buffer>;
+  onStart(ctx: Context): Promise<void>;
+  onStop(ctx: Context): Promise<void>;
+  dispatch(ctx: Context, envelope: RpcEnvelope): Promise<Buffer>;
 }
 ```
 

@@ -28,6 +28,7 @@ npm-debug.log*
 
 # Temporary
 examples/echo-client/.tmp/
+examples/**/generated/
 
 # Environment
 .env

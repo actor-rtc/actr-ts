@@ -5,9 +5,10 @@ import {
   Realm,
   PayloadType,
   DataStream,
+  StreamSignal,
   MetadataEntry,
   ContextBridge as NativeContextBridge,
-  RpcEnvelopeBridge,
+  RpcEnvelopeBridge as NativeRpcEnvelope,
 } from '../index';
 
 export {
@@ -16,14 +17,16 @@ export {
   Realm,
   PayloadType,
   DataStream,
+  StreamSignal,
   MetadataEntry,
-  RpcEnvelopeBridge,
 };
 
+export type RpcEnvelope = NativeRpcEnvelope;
+
 /**
- * Enhanced ContextBridge with helper methods.
+ * Enhanced Context with helper methods.
  */
-export interface ContextBridge extends NativeContextBridge {
+export interface Context extends NativeContextBridge {
   /**
    * Call a remote actor with default options (RpcReliable, 30s timeout).
    *
@@ -39,4 +42,3 @@ export interface ContextBridge extends NativeContextBridge {
    */
   callId(): ActrId | null;
 }
-

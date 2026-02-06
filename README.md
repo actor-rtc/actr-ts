@@ -28,18 +28,18 @@ npm install @actor-rtc/actr
 ### EchoTwice Server
 
 ```typescript
-import { ActrSystem, Workload, ContextBridge, RpcEnvelopeBridge } from '@actor-rtc/actr';
+import { ActrSystem, Workload, Context, RpcEnvelope } from '@actor-rtc/actr';
 
 class EchoTwiceServerWorkload implements Workload {
-  async onStart(ctx: ContextBridge): Promise<void> {
+  async onStart(ctx: Context): Promise<void> {
     console.log('EchoTwice server started');
   }
 
-  async onStop(ctx: ContextBridge): Promise<void> {
+  async onStop(ctx: Context): Promise<void> {
     console.log('EchoTwice server stopped');
   }
 
-  async dispatch(ctx: ContextBridge, envelope: RpcEnvelopeBridge): Promise<Buffer> {
+  async dispatch(ctx: Context, envelope: RpcEnvelope): Promise<Buffer> {
     if (envelope.routeKey === 'echo_twice.EchoTwiceService.EchoTwice') {
       return envelope.payload; // EchoTwice response is omitted for brevity
     }
@@ -123,7 +123,8 @@ tracing_enabled = false
 
 ## Generated Code (Examples)
 
-The example clients use pre-generated files under `examples/**/generated`. To regenerate them, use the repository codegen script (no Actr CLI required).
+The example clients use generated files under `examples/**/generated`, which are **git-ignored**.  
+After cloning the repository, you **must run the codegen script** before running the examples.
 
 Prerequisites:
 - `npm install` (installs `protobufjs` and `@iarna/toml` from devDependencies)
@@ -138,9 +139,9 @@ Notes:
 - The generator reads `Actr.lock.toml` first; ensure it includes all dependencies you want emitted.
 - Proto sources default to `examples/echo-client/protos/remote`.
 Outputs include:
-- `<package>.pb.ts/.js` protobuf codecs
-- `<package>.client.ts/.js` route helpers
-- `local.actor.ts/.js` local forwarding glue
+- `<package>.pb.ts` protobuf codecs
+- `<package>.client.ts` route helpers
+- `local.actor.ts` local forwarding glue
 
 ## API Documentation
 
@@ -175,9 +176,9 @@ Implement this interface to define actor behavior:
 
 ```typescript
 interface Workload {
-  onStart(ctx: ContextBridge): Promise<void>;
-  onStop(ctx: ContextBridge): Promise<void>;
-  dispatch(ctx: ContextBridge, envelope: RpcEnvelopeBridge): Promise<Buffer>;
+  onStart(ctx: Context): Promise<void>;
+  onStop(ctx: Context): Promise<void>;
+  dispatch(ctx: Context, envelope: RpcEnvelope): Promise<Buffer>;
 }
 ```
 

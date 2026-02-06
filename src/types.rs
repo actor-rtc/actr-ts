@@ -131,6 +131,12 @@ pub struct DataStream {
     pub timestamp_ms: Option<i64>,
 }
 
+#[napi(object)]
+pub struct StreamSignal {
+    pub chunk: DataStream,
+    pub sender: ActrId,
+}
+
 impl From<actr_protocol::DataStream> for DataStream {
     fn from(stream: actr_protocol::DataStream) -> Self {
         Self {

@@ -5,7 +5,7 @@ use napi::threadsafe_function::{ThreadsafeFunction, ThreadsafeFunctionCallMode};
 use napi_derive::napi;
 use std::sync::Arc;
 
-use crate::types::{ActrId, ActrType, DataStream, PayloadType};
+use crate::types::{ActrId, ActrType, DataStream, PayloadType, StreamSignal};
 
 #[napi]
 pub struct ContextBridge {
@@ -120,8 +120,8 @@ impl ContextBridge {
     pub async fn register_stream(
         &self,
         stream_id: String,
-        #[napi(ts_arg_type = "(chunk: DataStream, sender: ActrId) => void")]
-        callback: ThreadsafeFunction<(DataStream, ActrId)>,
+        #[napi(ts_arg_type = "(err: Error | null, signal: StreamSignal) => void")]
+        callback: ThreadsafeFunction<StreamSignal>,
     ) -> Result<()> {
         use actr_framework::Context;
         let callback = Arc::new(callback);
@@ -132,7 +132,10 @@ impl ContextBridge {
                     let chunk_bridge: DataStream = chunk.into();
                     let sender_bridge: ActrId = sender.into();
                     callback.call(
-                        Ok((chunk_bridge, sender_bridge)),
+                        Ok(StreamSignal {
+                            chunk: chunk_bridge,
+                            sender: sender_bridge,
+                        }),
                         ThreadsafeFunctionCallMode::NonBlocking,
                     );
                     Ok(())

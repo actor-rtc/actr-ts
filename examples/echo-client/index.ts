@@ -1,4 +1,4 @@
-import { ActrSystem, ContextBridge, RpcEnvelopeBridge } from '../../dist/index.js';
+import { ActrSystem, Context, RpcEnvelope } from '../../dist/index.js';
 import type { PayloadType } from '../../dist/index.js';
 import { decodeEchoResponse, encodeEchoRequest, ECHO_ROUTE_KEY } from './generated/echo.client';
 import {
@@ -12,15 +12,15 @@ const RPC_TIMEOUT_MS = 15000;
 const RPC_PAYLOAD_TYPE: PayloadType = 0;
 
 class EchoClientWorkload {
-  async onStart(ctx: ContextBridge): Promise<void> {
+  async onStart(ctx: Context): Promise<void> {
     console.log('Echo client started');
   }
 
-  async onStop(ctx: ContextBridge): Promise<void> {
+  async onStop(ctx: Context): Promise<void> {
     console.log('Echo client stopped');
   }
 
-  async dispatch(ctx: ContextBridge, envelope: RpcEnvelopeBridge): Promise<Buffer> {
+  async dispatch(ctx: Context, envelope: RpcEnvelope): Promise<Buffer> {
     console.log(`Received RPC: ${envelope.routeKey}`);
     return await dispatchLocalActor(ctx, envelope);
   }

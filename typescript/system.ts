@@ -1,6 +1,6 @@
 import { ActrSystem as NativeActrSystem } from '../index';
 import { ActrNode } from './node';
-import { ContextBridge, RpcEnvelopeBridge, PayloadType } from './types';
+import { ActrId, Context, RpcEnvelope, PayloadType } from './types';
 import { Workload } from './workload';
 
 /**
@@ -50,14 +50,14 @@ export class ActrSystem {
    */
   attach(workload: Workload): ActrNode {
     const nativeNode = this.native.attach({
-      onStart: async (err: unknown, ctx: ContextBridge) => {
+      onStart: async (err: unknown, ctx: Context) => {
         if (err) {
           throw err;
         }
         this.wrapContext(ctx);
         await workload.onStart(ctx);
       },
-      onStop: async (err: unknown, ctx: ContextBridge) => {
+      onStop: async (err: unknown, ctx: Context) => {
         if (err) {
           throw err;
         }
@@ -66,8 +66,8 @@ export class ActrSystem {
       },
       dispatch: async (
         err: unknown,
-        ctx: ContextBridge,
-        envelope: RpcEnvelopeBridge
+        ctx: Context,
+        envelope: RpcEnvelope
       ) => {
         if (err) {
           throw err;
@@ -79,9 +79,9 @@ export class ActrSystem {
     return new ActrNode(nativeNode);
   }
 
-  private wrapContext(ctx: ContextBridge): void {
+  private wrapContext(ctx: Context): void {
     if (!ctx.call) {
-      ctx.call = (target, routeKey, payload) => {
+      ctx.call = (target: ActrId, routeKey: string, payload: Buffer) => {
         return ctx.callRaw(target, routeKey, PayloadType.RpcReliable, payload, 30000);
       };
     }
