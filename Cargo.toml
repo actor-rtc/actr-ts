@@ -1,6 +1,6 @@
 [package]
 name = "actr-ts"
-version = "0.1.10"
+version = "0.1.11"
 edition = "2024"
 rust-version = "1.88"
 license = "Apache-2.0"
@@ -16,10 +16,10 @@ napi = { version = "3.8.2", features = ["async", "tokio_rt"] }
 napi-derive = "3.5.1"
 
 # actr dependencies (git rev)
-actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "1a4471aafcfc0ca88b1de67d157bfa855c959a3f" }
-actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "1a4471aafcfc0ca88b1de67d157bfa855c959a3f" }
-actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "1a4471aafcfc0ca88b1de67d157bfa855c959a3f" }
-actr-config = { git = "https://github.com/actor-rtc/actr", rev = "1a4471aafcfc0ca88b1de67d157bfa855c959a3f" }
+actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "2f5472f3946ef762c1b38162196e473f83f99f8f" }
+actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "2f5472f3946ef762c1b38162196e473f83f99f8f" }
+actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "2f5472f3946ef762c1b38162196e473f83f99f8f" }
+actr-config = { git = "https://github.com/actor-rtc/actr", rev = "2f5472f3946ef762c1b38162196e473f83f99f8f" }
 
 # Async runtime
 tokio = { version = "1", features = ["full"] }
