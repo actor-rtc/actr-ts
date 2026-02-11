@@ -16,10 +16,10 @@ napi = { version = "3.8.2", features = ["async", "tokio_rt"] }
 napi-derive = "3.5.1"
 
 # actr dependencies (git rev)
-actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "c2ab81c09a3892765daf4341cfb9863e2d814736" }
-actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "c2ab81c09a3892765daf4341cfb9863e2d814736" }
-actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "c2ab81c09a3892765daf4341cfb9863e2d814736" }
-actr-config = { git = "https://github.com/actor-rtc/actr", rev = "c2ab81c09a3892765daf4341cfb9863e2d814736" }
+actr-protocol = { git = "https://github.com/actor-rtc/actr", rev = "ee1ccc800ca9a493e08214415d04077e7dc7cf95" }
+actr-framework = { git = "https://github.com/actor-rtc/actr", rev = "ee1ccc800ca9a493e08214415d04077e7dc7cf95" }
+actr-runtime = { git = "https://github.com/actor-rtc/actr", rev = "ee1ccc800ca9a493e08214415d04077e7dc7cf95" }
+actr-config = { git = "https://github.com/actor-rtc/actr", rev = "ee1ccc800ca9a493e08214415d04077e7dc7cf95" }
 
 # Async runtime
 tokio = { version = "1", features = ["full"] }
